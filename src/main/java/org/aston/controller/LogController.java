@@ -24,9 +24,9 @@ public class LogController {
         this.logService = logService;
     }
 
-    @GetMapping("/{id}")
-    public Log getLog(@PathVariable Long id) {
-        return logService.getLog(id);
+    @GetMapping("/{logId}")
+    public Log getLog(@PathVariable Long logId, @PathVariable String studentId) {
+        return logService.getLog(logId, studentId);
     }
 
     @GetMapping
@@ -39,8 +39,8 @@ public class LogController {
         return logService.addLog(studentId, log);
     }
 
-    @PutMapping("/{studentId}")
-    public Log updateLog(@PathVariable Long studentId, @RequestBody Log log) {
-        return logService.updateLog(studentId, log);
+    @PutMapping("/{logId}")
+    public Log updateLog(@PathVariable String studentId, @PathVariable Long logId, @RequestBody Log log) {
+        return logService.updateLog(studentId, logId, log);
     }
 }
