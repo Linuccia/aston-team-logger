@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class StudentResponseDTO {
-    private Integer id;
+    private Long id;
     private String firstName;
     private String lastName;
     private List<Log> log;

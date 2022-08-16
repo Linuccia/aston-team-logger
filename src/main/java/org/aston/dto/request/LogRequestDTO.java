@@ -8,5 +8,5 @@ import lombok.Data;
 public class LogRequestDTO {
     private String message;
     private String date;
-    private Integer studentId;
+    private Long studentId;
 }
