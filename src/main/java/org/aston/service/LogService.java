@@ -11,9 +11,9 @@ public interface LogService {
 
     List<Log> getLogsByStudentId(Long studentId);
 
-    Log addLog(Log log);
+    Log addLog(Long studentId, Log log);
 
-    Log updateLog(Log log);
+    Log updateLog(Long id, Log log);
 
     Log deleteLog(Long id);
 

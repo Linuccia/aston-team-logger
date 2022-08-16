@@ -32,12 +32,12 @@ public class LogServiceImpl implements LogService {
     }
 
     @Override
-    public Log addLog(Log log) {
+    public Log addLog(Long studentId, Log log) {
         return null;
     }
 
     @Override
-    public Log updateLog(Log log) {
+    public Log updateLog(Long id, Log log) {
         return null;
     }
 
