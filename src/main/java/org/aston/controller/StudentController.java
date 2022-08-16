@@ -24,9 +24,9 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @GetMapping("/{id}")
-    public Student getStudent(@PathVariable Long id) {
-        return studentService.getStudent(id);
+    @GetMapping("/{studentsId}")
+    public Student getStudent(@PathVariable Long studentsId) {
+        return studentService.getStudent(studentsId);
     }
 
     @GetMapping
@@ -39,8 +39,8 @@ public class StudentController {
         return studentService.addStudent(student);
     }
 
-    @DeleteMapping("/{id}")
-    public Student deleteStudent(@PathVariable Long id) {
-        return studentService.deleteStudent(id);
+    @DeleteMapping("/{studentsId}")
+    public Student deleteStudent(@PathVariable Long studentsId) {
+        return studentService.deleteStudent(studentsId);
     }
 }
