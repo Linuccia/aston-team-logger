@@ -22,7 +22,7 @@ public class LogServiceImpl implements LogService {
     }
 
     @Override
-    public Log getLog(Long id) {
+    public Log getLog(Long id, String studentId) {
         return null;
     }
 
@@ -32,12 +32,12 @@ public class LogServiceImpl implements LogService {
     }
 
     @Override
-    public Log addLog(Log log) {
+    public Log addLog(Long studentId, Log log) {
         return null;
     }
 
     @Override
-    public Log updateLog(Log log) {
+    public Log updateLog(String studentId, Long id, Log log) {
         return null;
     }
 

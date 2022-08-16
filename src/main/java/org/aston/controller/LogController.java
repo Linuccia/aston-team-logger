@@ -17,32 +17,30 @@ import java.util.List;
 @RequestMapping("/students/{studentId}/logs")
 public class LogController {
 
-    private final LogService service;
+    private final LogService logService;
 
     @Autowired
-    public LogController(LogService service) {
-        this.service = service;
+    public LogController(LogService logService) {
+        this.logService = logService;
     }
 
-    @GetMapping("/{id}")
-    public Log getLog(@PathVariable Long id) {
-        return null;
+    @GetMapping("/{logId}")
+    public Log getLog(@PathVariable Long logId, @PathVariable String studentId) {
+        return logService.getLog(logId, studentId);
     }
 
     @GetMapping
-    public List<Log> getLogs(@PathVariable Long studentId) {
-        return null;
+    public List<Log> getLogsByStudentId(@PathVariable Long studentId) {
+        return logService.getLogsByStudentId(studentId);
     }
 
     @PostMapping
     public Log addLog(@PathVariable Long studentId, @RequestBody Log log) {
-        return null;
+        return logService.addLog(studentId, log);
     }
 
-    @PutMapping("/{id}")
-    public Log updateLog(@PathVariable Long id, @RequestBody Log log) {
-        return null;
+    @PutMapping("/{logId}")
+    public Log updateLog(@PathVariable String studentId, @PathVariable Long logId, @RequestBody Log log) {
+        return logService.updateLog(studentId, logId, log);
     }
-
-
 }
