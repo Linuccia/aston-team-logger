@@ -1,5 +1,6 @@
 package org.aston.config;
 
+import liquibase.integration.spring.SpringLiquibase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -33,6 +34,8 @@ public class Config implements WebMvcConfigurer {
     private String DB_USERNAME;
     @Value("${spring.datasource.password}")
     private String DB_PASSWORD;
+    @Value("${spring.liquibase.should-run}")
+    private boolean isLiquibaseRun;
 
     @Autowired
     public Config(Environment env) {
@@ -77,6 +80,16 @@ public class Config implements WebMvcConfigurer {
                 env.getProperty("spring.jpa.properties.hibernate.current_session_context_class"));
 
         return hibernateProperties;
+    }
+
+    @Bean
+    public SpringLiquibase getSpringLiquibase() {
+        SpringLiquibase springLiquibase = new SpringLiquibase();
+        springLiquibase.setDataSource(dataSource());
+        springLiquibase.setChangeLog(env.getProperty("spring.liquibase.change-log"));
+        springLiquibase.setShouldRun(isLiquibaseRun);
+
+        return springLiquibase;
     }
 
 }
