@@ -3,8 +3,6 @@ package org.aston.controller;
 import org.aston.model.Student;
 import org.aston.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,31 +17,30 @@ import java.util.List;
 @RequestMapping("/students")
 public class StudentController {
 
-    private final StudentService service;
+    private final StudentService studentService;
 
     @Autowired
-    public StudentController(StudentService service) {
-        this.service = service;
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
     }
 
-    @GetMapping("/{id}")
-    public Student getStudent(@PathVariable Long id) {
-        return null;
+    @GetMapping("/{studentsId}")
+    public Student getStudent(@PathVariable Long studentsId) {
+        return studentService.getStudent(studentsId);
     }
 
     @GetMapping
-    public List<Student> getStudents() {
-        return null;
+    public List<Student> getAllStudents() {
+        return studentService.getAllStudents();
     }
 
     @PostMapping
     public Student addStudent(@RequestBody Student student) {
-        return null;
+        return studentService.addStudent(student);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> removeStudent(@PathVariable Long id) {
-        return null;
+    @DeleteMapping("/{studentsId}")
+    public Student deleteStudent(@PathVariable Long studentsId) {
+        return studentService.deleteStudent(studentsId);
     }
-
 }
