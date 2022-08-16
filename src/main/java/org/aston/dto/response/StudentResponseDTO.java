@@ -9,7 +9,6 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-@RequiredArgsConstructor
 public class StudentResponseDTO {
     private Integer id;
     private String firstName;

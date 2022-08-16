@@ -7,7 +7,6 @@ import org.aston.model.UserRole;
 
 @Data
 @AllArgsConstructor
-@RequiredArgsConstructor
 public class StudentRequestDTO {
     private String firstName;
     private String lastName;
