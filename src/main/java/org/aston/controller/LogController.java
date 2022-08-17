@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.aston.dto.request.LogRequestDTO;
 import org.aston.dto.response.LogResponseDTO;
 import org.aston.model.Log;
 import org.aston.service.LogService;
@@ -126,7 +127,7 @@ public class LogController {
                     })
     @PostMapping
     public LogResponseDTO addLog(@Parameter(description = "ID of student to add log", example = "1")
-                                 @PathVariable Long studentId, @RequestBody Log log) {
+                                 @PathVariable Long studentId, @RequestBody LogRequestDTO log) {
         Log logToAdd = new Log();
         logToAdd.setMessage(log.getMessage());
         Log persistedLog = logService.addLog(studentId, logToAdd);
@@ -165,8 +166,10 @@ public class LogController {
                     })
     @PutMapping("/{logId}")
     public LogResponseDTO updateLog(@Parameter(description = "ID of log for update", example = "1")
-                                    @PathVariable Long studentId, @PathVariable Long logId, @RequestBody Log log) {
-        Log updatedLog = logService.updateLog(studentId, logId, log);
+                                    @PathVariable Long studentId, @PathVariable Long logId, @RequestBody LogRequestDTO log) {
+        Log currentLog = logService.getLog(logId,studentId);
+        currentLog.setMessage(log.getMessage());
+        Log updatedLog = logService.updateLog(studentId, logId, currentLog);
         return convertToDTO(updatedLog);
     }
 
