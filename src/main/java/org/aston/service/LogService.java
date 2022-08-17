@@ -13,7 +13,7 @@ public interface LogService {
 
     Log addLog(Long studentId, Log log);
 
-    Log updateLog(String studentId, Long id, Log log);
+    Log updateLog(Long studentId, Long id, Log log);
 
     Log deleteLog(Long id);
 

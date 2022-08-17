@@ -37,7 +37,7 @@ public class LogServiceImpl implements LogService {
     }
 
     @Override
-    public Log updateLog(String studentId, Long id, Log log) {
+    public Log updateLog(Long studentId, Long id, Log log) {
         return null;
     }
 

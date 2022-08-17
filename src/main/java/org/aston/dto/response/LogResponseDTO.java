@@ -1,4 +1,4 @@
-package org.aston.dto.request;
+package org.aston.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,8 +7,7 @@ import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
-public class LogRequestDTO {
-    private String message;
+public class LogResponseDTO {
     private LocalDate date;
-    private Long studentId;
+    private String message;
 }
