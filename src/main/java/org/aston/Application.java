@@ -39,7 +39,7 @@ public class Application extends AbstractAnnotationConfigDispatcherServletInitia
 
     private AnnotationConfigWebApplicationContext getContext() {
         AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
-        context.scan("ru.aston");
+        context.scan("org.aston");
         context.register(Config.class, org.springdoc.webmvc.ui.SwaggerConfig.class,
                 org.springdoc.core.SwaggerUiConfigProperties.class, org.springdoc.core.SwaggerUiOAuthProperties.class,
                 org.springdoc.webmvc.core.SpringDocWebMvcConfiguration.class,
