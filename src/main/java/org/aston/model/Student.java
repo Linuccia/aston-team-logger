@@ -14,12 +14,13 @@ import javax.persistence.Enumerated;
 import javax.persistence.EnumType;
 import javax.persistence.OneToMany;
 import javax.persistence.CascadeType;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Data
 @Table(name = "student")
-public class Student {
+public class Student implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

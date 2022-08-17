@@ -2,11 +2,15 @@ package org.aston.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.aston.model.UserRole;
+
+import java.io.Serializable;
 
 @Data
 @AllArgsConstructor
-public class StudentRequestDTO {
+@NoArgsConstructor
+public class StudentRequestDTO implements Serializable {
 
     private String firstName;
     private String lastName;

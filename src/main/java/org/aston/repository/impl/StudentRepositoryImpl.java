@@ -2,10 +2,14 @@ package org.aston.repository.impl;
 
 import org.aston.model.Student;
 import org.aston.repository.StudentRepository;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
 @Repository
@@ -25,8 +29,17 @@ public class StudentRepositoryImpl implements StudentRepository {
 
     @Override
     public List<Student> getAll() {
-        return sessionFactory.getCurrentSession()
-                .createQuery("SELECT a FROM Student a", Student.class).list();
+        Session session;
+        try {
+            session = sessionFactory.getCurrentSession();
+        } catch (HibernateException e) {
+            session = sessionFactory.openSession();
+        }
+       // return session.createQuery("SELECT a FROM Student a", Student.class).list();
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<Student> criteriaQuery = criteriaBuilder.createQuery(Student.class);
+        criteriaQuery.from(Student.class);
+        return session.createQuery(criteriaQuery).getResultList();
     }
 
     @Override

@@ -3,6 +3,8 @@ package org.aston.config;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
 import liquibase.integration.spring.SpringLiquibase;
+import org.aston.model.Log;
+import org.aston.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -57,6 +59,8 @@ public class Config implements WebMvcConfigurer {
         sessionFactory.setDataSource(dataSource());
         sessionFactory.setPackagesToScan("org.aston");
         sessionFactory.setHibernateProperties(hibernateProperties());
+        sessionFactory.setAnnotatedClasses(Student.class); //
+        sessionFactory.setAnnotatedClasses(Log.class); //
 
         return sessionFactory;
     }
@@ -80,13 +84,18 @@ public class Config implements WebMvcConfigurer {
     }
 
     private Properties hibernateProperties() {
-        Properties hibernateProperties = new Properties();
-        hibernateProperties.put("spring.jpa.show-sql", env.getProperty("spring.jpa.show-sql"));
+       Properties hibernateProperties = new Properties();
+       /*  hibernateProperties.put("spring.jpa.show-sql", env.getProperty("spring.jpa.show-sql"));
         hibernateProperties.put("spring.jpa.hibernate.ddl-auto", env.getProperty("spring.jpa.hibernate.ddl-auto"));
         hibernateProperties.put("spring.jpa.properties.hibernate.dialect",
                 env.getProperty("spring.jpa.properties.hibernate.dialect"));
         hibernateProperties.put("spring.jpa.properties.hibernate.current_session_context_class",
                 env.getProperty("spring.jpa.properties.hibernate.current_session_context_class"));
+*/
+        hibernateProperties.setProperty(
+                "hibernate.hbm2ddl.auto", "create");
+        hibernateProperties.setProperty(
+                "hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
 
         return hibernateProperties;
     }
