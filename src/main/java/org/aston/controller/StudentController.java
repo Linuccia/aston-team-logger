@@ -1,5 +1,7 @@
 package org.aston.controller;
 
+import org.aston.dto.request.StudentRequestDTO;
+import org.aston.dto.response.StudentResponseDTO;
 import org.aston.model.Student;
 import org.aston.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 @RestController
-@RequestMapping("/students")
+@RequestMapping("/student")
 public class StudentController {
 
     private final StudentService studentService;
@@ -24,23 +28,43 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @GetMapping("/{studentsId}")
-    public Student getStudent(@PathVariable Long studentsId) {
-        return studentService.getStudent(studentsId);
+    @GetMapping("/{studentId}")
+    public StudentResponseDTO getStudent(@PathVariable Long studentId) {
+        Student currentStudent = studentService.getStudent(studentId);
+        return convertToDTO(currentStudent);
     }
 
     @GetMapping
-    public List<Student> getAllStudents() {
-        return studentService.getAllStudents();
+    public List<StudentResponseDTO> getAllStudents() {
+        return studentService.getAllStudents()
+                .stream()
+                .map(this::convertToDTO)
+                .collect(toList());
     }
 
     @PostMapping
-    public Student addStudent(@RequestBody Student student) {
-        return studentService.addStudent(student);
+    public StudentResponseDTO addStudent(@RequestBody StudentRequestDTO studentRequestDTO) {
+        Student student = new Student();
+        student.setFirstName(studentRequestDTO.getFirstName());
+        student.setLastName(studentRequestDTO.getLastName());
+        student.setUserRole(studentRequestDTO.getRole());
+        student.setPassword(studentRequestDTO.getPassword());
+
+        Student persistedStudent = studentService.addStudent(student);
+        return convertToDTO(persistedStudent);
     }
 
-    @DeleteMapping("/{studentsId}")
-    public Student deleteStudent(@PathVariable Long studentsId) {
-        return studentService.deleteStudent(studentsId);
+    @DeleteMapping("/{studentId}")
+    public StudentResponseDTO deleteStudent(@PathVariable Long studentId) {
+        Student deletedStudent = studentService.deleteStudent(studentId);
+        return convertToDTO(deletedStudent);
+    }
+
+    private StudentResponseDTO convertToDTO(Student student) {
+        return new StudentResponseDTO(
+                student.getId(),
+                student.getFirstName(),
+                student.getLastName(),
+                student.getLog());
     }
 }
