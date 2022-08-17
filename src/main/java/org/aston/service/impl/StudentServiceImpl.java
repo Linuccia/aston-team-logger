@@ -5,10 +5,12 @@ import org.aston.repository.StudentRepository;
 import org.aston.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class StudentServiceImpl implements StudentService {
 
     private final StudentRepository studentRepository;
@@ -20,22 +22,22 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student getStudent(Long id) {
-        return null;
+        return studentRepository.getById(id);
     }
 
     @Override
     public List<Student> getAllStudents() {
-        return null;
+        return studentRepository.getAll();
     }
 
     @Override
     public Student addStudent(Student student) {
-        return null;
+        return studentRepository.save(student);
     }
 
     @Override
     public Student deleteStudent(Long id) {
-        return null;
+        return studentRepository.deleteById(id);
     }
 
 }

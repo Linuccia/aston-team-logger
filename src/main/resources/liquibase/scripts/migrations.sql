@@ -49,6 +49,14 @@ VALUES ('Ольга', 'Макеева'),
        ('Александр', 'Варкан'),
        ('Олег', 'Гвоздь');
 
+-- changeset anton:3
+
+alter table student
+alter column id TYPE bigint;
+
+alter table log
+    alter column id TYPE bigint,
+    alter column student_id TYPE bigint
 
 
 
