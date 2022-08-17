@@ -2,6 +2,7 @@ package org.aston.service.impl;
 
 import org.aston.model.Log;
 import org.aston.repository.LogRepository;
+import org.aston.repository.StudentRepository;
 import org.aston.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,10 +16,12 @@ import java.util.List;
 public class LogServiceImpl implements LogService {
 
     private final LogRepository logRepository;
+    private final StudentRepository studentRepository;
     
     @Autowired
-    public LogServiceImpl(LogRepository logRepository) {
+    public LogServiceImpl(LogRepository logRepository, StudentRepository studentRepository) {
         this.logRepository = logRepository;
+        this.studentRepository = studentRepository;
     }
 
     @Override
@@ -32,14 +35,17 @@ public class LogServiceImpl implements LogService {
     }
 
     @Override
-    public Log addLog(Log log) {
+    public Log addLog(Long studentId, Log log) {
+        log.setStudent(studentRepository.getById(studentId));
     	log.setDate(LocalDate.now());
         return logRepository.save(log);
     }
 
     @Override
-    public Log updateLog(Log log) {
-        return logRepository.update(log);
+    public Log updateLog(Long id, Log log) {
+        Log updated = logRepository.getById(id);
+        updated.setMessage(log.getMessage());
+        return logRepository.update(updated);
     }
 
     @Override

@@ -16,7 +16,8 @@ import java.time.LocalDate;
 @Entity
 @Data
 @Table(name = "log")
-public class Log{
+public class Log {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -28,4 +29,5 @@ public class Log{
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     private Student student;
+
 }

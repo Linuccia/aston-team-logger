@@ -23,11 +23,6 @@ public class Application extends AbstractAnnotationConfigDispatcherServletInitia
     }
 
     @Override
-    protected String[] getServletMappings() {
-        return new String[] {"/"};
-    }
-
-    @Override
     public void onStartup(ServletContext servletContext) {
         WebApplicationContext context = getContext();
         servletContext.addListener(new ContextLoaderListener(context));
@@ -35,6 +30,11 @@ public class Application extends AbstractAnnotationConfigDispatcherServletInitia
                 new DispatcherServlet(context));
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping("/*");
+    }
+
+    @Override
+    protected String[] getServletMappings() {
+        return new String[] {"/"};
     }
 
     private AnnotationConfigWebApplicationContext getContext() {

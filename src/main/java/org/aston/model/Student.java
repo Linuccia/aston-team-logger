@@ -20,6 +20,7 @@ import java.util.List;
 @Data
 @Table(name = "student")
 public class Student {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -35,4 +36,5 @@ public class Student {
     private String password;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Log> log;
+
 }
