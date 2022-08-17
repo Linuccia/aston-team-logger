@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface LogService {
 
-    Log getLog(Long id, String studentId);
+    Log getLog(Long id, Long studentId);
 
     List<Log> getLogsByStudentId(Long studentId);
 
