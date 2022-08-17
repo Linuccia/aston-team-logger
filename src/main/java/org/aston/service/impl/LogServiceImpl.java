@@ -2,10 +2,10 @@ package org.aston.service.impl;
 
 import org.aston.model.Log;
 import org.aston.repository.LogRepository;
-import org.aston.repository.StudentRepository;
 import org.aston.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,37 +13,40 @@ import java.util.List;
 public class LogServiceImpl implements LogService {
 
     private final LogRepository logRepository;
-    private final StudentRepository studentRepository;
-
+    
     @Autowired
-    public LogServiceImpl(LogRepository logRepository, StudentRepository studentRepository) {
+    public LogServiceImpl(LogRepository logRepository) {
         this.logRepository = logRepository;
-        this.studentRepository = studentRepository;
     }
 
     @Override
+    @Transactional
     public Log getLog(Long id) {
-        return null;
+        return logRepository.getById(id);
     }
 
     @Override
+    @Transactional
     public List<Log> getLogsByStudentId(Long studentId) {
-        return null;
+        return logRepository.getAllByStudentId(studentId);
     }
 
     @Override
+    @Transactional
     public Log addLog(Log log) {
-        return null;
+        return logRepository.save(log);
     }
 
     @Override
+    @Transactional
     public Log updateLog(Log log) {
-        return null;
+        return logRepository.update(log);
     }
 
     @Override
+    @Transactional
     public Log deleteLog(Long id) {
-        return null;
+        return logRepository.deleteById(id);
     }
 
 }
