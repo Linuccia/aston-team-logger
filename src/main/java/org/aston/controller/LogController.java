@@ -12,6 +12,7 @@ import org.aston.model.Log;
 import org.aston.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -167,6 +168,12 @@ public class LogController {
                                     @PathVariable Long studentId, @PathVariable Long logId, @RequestBody Log log) {
         Log updatedLog = logService.updateLog(studentId, logId, log);
         return convertToDTO(updatedLog);
+    }
+
+    @DeleteMapping("/{logId}")
+    public LogResponseDTO deleteLog(@PathVariable Long logId, @PathVariable String studentId) {
+        Log deletedLog = logService.deleteLog(logId);
+        return convertToDTO(deletedLog);
     }
 
     private LogResponseDTO convertToDTO(Log log) {
