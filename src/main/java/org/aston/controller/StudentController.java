@@ -7,15 +7,13 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.aston.model.Log;
 import org.aston.dto.request.StudentRequestDTO;
 import org.aston.dto.response.StudentResponseDTO;
+import org.aston.model.Log;
 import org.aston.model.Student;
 import org.aston.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,8 +24,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Tag(name = "StudentController", description = "Everything about students")
 import static java.util.stream.Collectors.toList;
+
+@Tag(name = "StudentController", description = "Everything about students")
 
 @RestController
 @RequestMapping("/students")
@@ -61,8 +60,8 @@ public class StudentController {
                     )
             })
     @GetMapping("/{studentId}")
-    public Student getStudent(@Parameter(description = "ID of student to find", example = "1")
-                              @PathVariable Long studentId) {
+    public StudentResponseDTO getStudent(@Parameter(description = "ID of student to find", example = "1")
+                                         @PathVariable Long studentId) {
         Student currentStudent = studentService.getStudent(studentId);
         return convertToDTO(currentStudent);
     }
@@ -149,8 +148,8 @@ public class StudentController {
                             )
                     })
     @DeleteMapping("/{studentId}")
-    public ResponseEntity<HttpStatus> removeStudent(@Parameter(description = "ID of student for update", example = "1")
-                                                    @PathVariable Long studentId) {
+    public StudentResponseDTO removeStudent(@Parameter(description = "ID of student for update", example = "1")
+                                            @PathVariable Long studentId) {
         Student deletedStudent = studentService.deleteStudent(studentId);
         return convertToDTO(deletedStudent);
     }
