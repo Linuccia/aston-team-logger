@@ -9,6 +9,5 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class LogRequestDTO {
     private String message;
-    private LocalDate date;
     private Long studentId;
 }
