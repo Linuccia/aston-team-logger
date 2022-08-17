@@ -1,5 +1,7 @@
 package org.aston.config;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
 import liquibase.integration.spring.SpringLiquibase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,6 +20,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import javax.sql.DataSource;
 import java.util.Properties;
 
+@OpenAPIDefinition(info =
+@Info(
+        title = "Aston-team-logger",
+        version = "1.0",
+        description = "This is the api for send of logs on learning by Aston java intensive students"
+)
+)
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
