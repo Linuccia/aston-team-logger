@@ -86,7 +86,7 @@ public class LogController {
             })
     @GetMapping
     public List<LogResponseDTO> getLogs(@Parameter(description = "ID of student to find logs", example = "1")
-                             @PathVariable Long studentId) {
+                                        @PathVariable Long studentId) {
         return logService.getLogsByStudentId(studentId)
                 .stream()
                 .map(this::convertToDTO)
@@ -125,10 +125,9 @@ public class LogController {
                     })
     @PostMapping
     public LogResponseDTO addLog(@Parameter(description = "ID of student to add log", example = "1")
-                      @PathVariable Long studentId, @RequestBody Log log) {
+                                 @PathVariable Long studentId, @RequestBody Log log) {
         Log logToAdd = new Log();
         logToAdd.setMessage(log.getMessage());
-        logToAdd.setDate(log.getDate());
         Log persistedLog = logService.addLog(studentId, logToAdd);
         return convertToDTO(persistedLog);
     }
@@ -165,14 +164,14 @@ public class LogController {
                     })
     @PutMapping("/{logId}")
     public LogResponseDTO updateLog(@Parameter(description = "ID of log for update", example = "1")
-                         @PathVariable Long studentId, @PathVariable Long logId, @RequestBody Log log) {
+                                    @PathVariable Long studentId, @PathVariable Long logId, @RequestBody Log log) {
         Log updatedLog = logService.updateLog(studentId, logId, log);
         return convertToDTO(updatedLog);
     }
+
     private LogResponseDTO convertToDTO(Log log) {
         return new LogResponseDTO(
                 log.getDate(),
                 log.getMessage());
     }
-
 }
