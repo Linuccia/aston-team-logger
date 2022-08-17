@@ -4,6 +4,7 @@ import lombok.Data;
 
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -32,6 +33,6 @@ public class Student {
     private UserRole userRole;
     @Column(name = "password")
     private String password;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Log> log;
 }
