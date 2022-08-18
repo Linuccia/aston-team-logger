@@ -56,7 +56,20 @@ alter column id TYPE bigint;
 
 alter table log
     alter column id TYPE bigint,
-    alter column student_id TYPE bigint
+    alter column student_id TYPE bigint;
 
+-- changeset anton:4
 
-
+create table student_log
+(
+    student_id bigint not null
+        constraint student_id
+            references student,
+    log_id     bigint not null
+        constraint log_id_unique
+            unique
+        constraint log_id
+            references log,
+    constraint student_log_pkey
+        primary key (student_id, log_id)
+);
