@@ -167,8 +167,31 @@ public class LogController {
         return mapper.toDto(service.updateLog(id, mapper.toLog(logDto)));
     }
 
+    @Operation(summary = "Delete log by log ID",
+            responses =
+                    {
+                            @ApiResponse(
+                                    responseCode = "200",
+                                    description = "Result of successful delete",
+                                    content = @Content(
+                                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                            array = @ArraySchema(schema = @Schema(implementation = Log.class))
+                                    )
+                            ),
+                            @ApiResponse(
+                                    responseCode = "400",
+                                    description = "Invalid ID supplied",
+                                    content = @Content(schema = @Schema(hidden = true))
+                            ),
+                            @ApiResponse(
+                                    responseCode = "404",
+                                    description = "Log not found",
+                                    content = @Content(schema = @Schema(hidden = true))
+                            )
+                    })
     @DeleteMapping("/{id}")
-    public LogResponseDTO deleteLog(@PathVariable Long id) {
+    public LogResponseDTO deleteLog(@Parameter(description = "ID of log for delete", example = "1")
+                                    @PathVariable Long id) {
         return mapper.toDto(service.deleteLog(id));
     }
 
