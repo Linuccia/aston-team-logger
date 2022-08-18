@@ -34,7 +34,9 @@ public class Student {
     private UserRole userRole;
     @Column(name = "password")
     private String password;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "student",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER)
     private List<Log> log;
 
 }
