@@ -69,5 +69,7 @@ create table student_log
         constraint log_id_unique
             unique
         constraint log_id
-            references log
-)
+            references log,
+    constraint student_log_pkey
+        primary key (student_id, log_id)
+);
