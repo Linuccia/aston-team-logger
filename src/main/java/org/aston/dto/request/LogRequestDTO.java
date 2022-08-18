@@ -4,9 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @AllArgsConstructor
-public class LogRequestDTO {
+@NoArgsConstructor
+public class LogRequestDTO implements Serializable {
 
     private String message;
 

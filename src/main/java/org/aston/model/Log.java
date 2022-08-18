@@ -11,12 +11,13 @@ import javax.persistence.Column;
 import javax.persistence.GenerationType;
 import javax.persistence.ManyToOne;
 import javax.persistence.CascadeType;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
 @Data
 @Table(name = "log")
-public class Log {
+public class Log implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
