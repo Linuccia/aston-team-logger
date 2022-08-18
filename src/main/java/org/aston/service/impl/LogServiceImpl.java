@@ -17,7 +17,7 @@ public class LogServiceImpl implements LogService {
 
     private final LogRepository logRepository;
     private final StudentRepository studentRepository;
-    
+
     @Autowired
     public LogServiceImpl(LogRepository logRepository, StudentRepository studentRepository) {
         this.logRepository = logRepository;
@@ -26,7 +26,8 @@ public class LogServiceImpl implements LogService {
 
     @Override
     public Log getLog(Long id) {
-        return logRepository.getById(id);
+        Log log = logRepository.getById(id);
+        return log != null ? log : new Log();
     }
 
     @Override
@@ -37,20 +38,24 @@ public class LogServiceImpl implements LogService {
     @Override
     public Log addLog(Long studentId, Log log) {
         log.setStudent(studentRepository.getById(studentId));
-    	log.setDate(LocalDate.now());
+        log.setDate(LocalDate.now());
         return logRepository.save(log);
     }
 
     @Override
     public Log updateLog(Long id, Log log) {
         Log updated = logRepository.getById(id);
-        updated.setMessage(log.getMessage());
-        return logRepository.update(updated);
+        if (updated != null) {
+            updated.setMessage(log.getMessage());
+            return logRepository.update(updated);
+        }
+        return new Log();
     }
 
     @Override
     public Log deleteLog(Long id) {
-        return logRepository.deleteById(id);
+        Log log = logRepository.getById(id);
+        return log != null ? logRepository.deleteById(id) : new Log();
     }
 
 }
