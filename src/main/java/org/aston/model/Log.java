@@ -3,14 +3,7 @@ package org.aston.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Column;
-import javax.persistence.GenerationType;
-import javax.persistence.ManyToOne;
-import javax.persistence.CascadeType;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -28,6 +21,7 @@ public class Log {
     private String message;
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "student_id")
     private Student student;
 
 }
