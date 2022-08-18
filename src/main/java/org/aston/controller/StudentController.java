@@ -48,16 +48,6 @@ public class StudentController {
                             content = @Content(
                                     mediaType = MediaType.APPLICATION_JSON_VALUE,
                                     schema = @Schema(implementation = Student.class))
-                    ),
-                    @ApiResponse(
-                            responseCode = "400",
-                            description = "Invalid ID supplied",
-                            content = @Content(schema = @Schema(hidden = true))
-                    ),
-                    @ApiResponse(
-                            responseCode = "404",
-                            description = "Student not found",
-                            content = @Content(schema = @Schema(hidden = true))
                     )
             })
     @GetMapping("/{id}")
@@ -75,11 +65,6 @@ public class StudentController {
                                     mediaType = MediaType.APPLICATION_JSON_VALUE,
                                     array = @ArraySchema(schema = @Schema(implementation = Log.class))
                             )
-                    ),
-                    @ApiResponse(
-                            responseCode = "404",
-                            description = "Students not found",
-                            content = @Content(schema = @Schema(hidden = true))
                     )
             })
     @GetMapping
@@ -104,8 +89,8 @@ public class StudentController {
                                     )
                             ),
                             @ApiResponse(
-                                    responseCode = "405",
-                                    description = "Invalid input",
+                                    responseCode = "403",
+                                    description = "Invalid authorization",
                                     content = @Content(schema = @Schema(hidden = true))
                             )
                     })
@@ -129,13 +114,8 @@ public class StudentController {
                                     )
                             ),
                             @ApiResponse(
-                                    responseCode = "400",
-                                    description = "Invalid ID supplied",
-                                    content = @Content(schema = @Schema(hidden = true))
-                            ),
-                            @ApiResponse(
-                                    responseCode = "404",
-                                    description = "Student not found",
+                                    responseCode = "403",
+                                    description = "Invalid authorization",
                                     content = @Content(schema = @Schema(hidden = true))
                             )
                     })
