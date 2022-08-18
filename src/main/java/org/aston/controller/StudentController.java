@@ -140,7 +140,7 @@ public class StudentController {
                             )
                     })
     @DeleteMapping("/{id}")
-    public StudentResponseDTO removeStudent(@Parameter(description = "ID of student for update", example = "1")
+    public StudentResponseDTO removeStudent(@Parameter(description = "ID of student for delete", example = "1")
                                             @PathVariable Long id) {
         return mapper.toDto(service.deleteStudent(id));
     }
